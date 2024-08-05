@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="button_color">#4A148C</color>
+    <color name="stepper_background">#FFFFFF</color>
+    <color name="step_indicator_active">#4A148C</color>
+    <color name="step_indicator_inactive">#B0BEC5</color>
+</resources>
+

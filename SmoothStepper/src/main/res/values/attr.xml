@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="StepperView">
+        <attr name="prevButtonTextColor" format="color"/>
+        <attr name="nextButtonTextColor" format="color"/>
+        <attr name="prevButtonText" format="string"/>
+        <attr name="nextButtonText" format="string"/>
+    </declare-styleable>
+</resources>
