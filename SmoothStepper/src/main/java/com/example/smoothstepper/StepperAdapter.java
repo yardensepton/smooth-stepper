@@ -22,14 +22,14 @@ public class StepperAdapter extends FragmentStateAdapter {
         return fragments.get(position);
     }
 
+    @NonNull
+    public List<Fragment> getFragments() {
+        return fragments;
+    }
+
     @Override
     public int getItemCount() {
         return fragments.size();
     }
 
-    public void updateSteps(List<Fragment> newFragments) {
-        this.fragments.clear();
-        this.fragments.addAll(newFragments);
-//        notifyDataSetChanged();
-    }
 }

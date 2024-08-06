@@ -1,11 +1,14 @@
 package com.example.myapplication;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import androidx.activity.ComponentActivity;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+
 import com.example.smoothstepper.StepperView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +20,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         StepperView stepperView = findViewById(R.id.stepperView);
+        ArrayList<Integer> icons = new ArrayList<>();
+        icons.add(R.drawable.user_icon);
+        icons.add(R.drawable.fruit_icon);
 
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new StepFragment());
         fragments.add(new MoreStepFragment());
-        // Uncomment if needed
-        // fragments.add(new Step3Fragment());
+        stepperView.setButtonsBackgroundColor(Color.BLUE).
+                setButtonsTextColor(Color.WHITE)
+                .setTabsColor(Color.RED, Color.GRAY)
+                .setSteps(this, fragments)
+                .areTabsClickable(false).addTabsIcons(icons)
+                .setFinishButtonClickListener(finishStepper());
+    }
 
-        // Pass the FragmentActivity to setSteps
-        stepperView.setSteps(this, fragments);
+    private StepperView.FinishButtonClickListener finishStepper() {
+        return () -> Log.e("MainActivity", "Finish button clicked");
     }
 }

@@ -1,18 +1,19 @@
 package com.example.smoothstepper;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -27,8 +28,11 @@ public class StepperView extends LinearLayout {
     private Button nextButton;
     private StepperAdapter stepperAdapter;
     private int fragmentsAmount;
+    private String toastMessage;
 
     private TabLayout tabLayout;
+    private int selectedColor;
+    private int unselectedColor;
 
     private FinishButtonClickListener finishButtonClickListener;
 
@@ -47,8 +51,9 @@ public class StepperView extends LinearLayout {
         init(context);
     }
 
-    public void setFinishButtonClickListener(FinishButtonClickListener listener) {
+    public StepperView setFinishButtonClickListener(FinishButtonClickListener listener) {
         this.finishButtonClickListener = listener;
+        return this;
     }
 
     public interface FinishButtonClickListener {
@@ -64,8 +69,18 @@ public class StepperView extends LinearLayout {
         nextButton = view.findViewById(R.id.nextButton);
         tabLayout = view.findViewById(R.id.tabLayout);
 
+        setTabsColor(Color.BLUE, Color.GRAY);
+
+
         prevButton.setOnClickListener(v -> prevStep());
         nextButton.setOnClickListener(v -> {
+            if (!isDataValid(viewPager.getCurrentItem())) {
+                String message = (toastMessage != null && !toastMessage.trim().isEmpty())
+                        ? toastMessage
+                        : "Please complete the required fields.";
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (viewPager.getCurrentItem() == fragmentsAmount - 1) {
                 if (finishButtonClickListener != null) {
                     finishButtonClickListener.onFinishButtonClick();
@@ -84,25 +99,72 @@ public class StepperView extends LinearLayout {
         });
     }
 
-    public void setSteps(FragmentActivity fragmentActivity, List<Fragment> fragments) {
-        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+
+
+    public StepperView setSteps(FragmentActivity fragmentActivity, List<Fragment> fragments) {
         stepperAdapter = new StepperAdapter(fragmentActivity, fragments);
         viewPager.setAdapter(stepperAdapter);
         fragmentsAmount = fragments.size();
 
         // Create and add tabs dynamically
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText("Step " + (position + 1))).attach();
-
-        Log.d("StepperView", "setSteps: " + fragmentsAmount);
         updateButtons();
+        return this;
     }
 
-    public void updateSteps(List<Fragment> newFragments) {
-        if (stepperAdapter != null) {
-            stepperAdapter.updateSteps(newFragments);
-            updateButtons();
+    public StepperView areTabsClickable(boolean areTabsClickable) {
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            Objects.requireNonNull(tabLayout.getTabAt(i)).view.setClickable(areTabsClickable);
         }
+        return this;
     }
+
+    public StepperView addTabsIcons(ArrayList<Integer> drawableIds) {
+        if (drawableIds.size() != tabLayout.getTabCount()) {
+            return this;
+        }
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            Objects.requireNonNull(tabLayout.getTabAt(i)).setIcon(drawableIds.get(i));
+        }
+        return this;
+    }
+
+
+    public StepperView setButtonsBackgroundColor(int color) {
+        prevButton.setBackgroundColor(color);
+        nextButton.setBackgroundColor(color);
+        return this;
+    }
+
+    public StepperView setButtonsTextColor(int color) {
+        prevButton.setTextColor(color);
+        nextButton.setTextColor(color);
+        return this;
+    }
+
+    public StepperView setButtonsTextSize(float size) {
+        prevButton.setTextSize(size);
+        nextButton.setTextSize(size);
+        return this;
+    }
+
+    public StepperView setTabsColor(int selectedColor, int unselectedColor) {
+        this.selectedColor = selectedColor;
+        this.unselectedColor = unselectedColor;
+        tabLayout.setTabTextColors(unselectedColor, selectedColor);
+        tabLayout.setSelectedTabIndicatorColor(selectedColor);
+        return this;
+    }
+
+    private boolean isDataValid(int stepIndex) {
+        Fragment fragment = stepperAdapter.createFragment(stepIndex);
+        if (fragment instanceof BaseStepperFragment) {
+            return ((BaseStepperFragment) fragment).isDataValid();
+        }
+        return false;
+    }
+
+
 
     private void prevStep() {
         int currentItem = viewPager.getCurrentItem();
@@ -121,8 +183,21 @@ public class StepperView extends LinearLayout {
     }
 
     private void updateButtons() {
+
         int currentItem = viewPager.getCurrentItem();
-        Log.d("StepperView", "currentItem: " + currentItem);
+
+        Fragment currentFragment = stepperAdapter.getFragments().get(currentItem);
+        if (currentFragment instanceof BaseStepperFragment) {
+            ((BaseStepperFragment) currentFragment).setToastMessage();
+            this.toastMessage= ((BaseStepperFragment) currentFragment).getToastMessage();
+
+        }
+
+        if (Objects.requireNonNull(tabLayout.getTabAt(currentItem)).getIcon() != null) {
+
+            Objects.requireNonNull(Objects.requireNonNull(tabLayout.getTabAt(currentItem)).getIcon()).setTint(selectedColor);
+        }
+
 
         // Handle the visibility of the previous button
         if (currentItem == 0) {
@@ -138,7 +213,6 @@ public class StepperView extends LinearLayout {
             nextButton.setText(getContext().getString(R.string.next));
         }
 
-        // Set the enabled state for both buttons
         prevButton.setEnabled(currentItem > 0);
     }
 }

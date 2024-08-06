@@ -5,12 +5,10 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-
-
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
-        android:text="title"
+        android:text="@string/title"
         android:gravity="center"
         android:layout_height="wrap_content"
         android:textSize="24sp"

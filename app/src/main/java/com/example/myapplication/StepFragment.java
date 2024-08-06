@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -10,8 +12,14 @@ public class StepFragment extends BaseStepperFragment {
 EditText editText ;
 
     @Override
+    protected boolean isDataValid() {
+        return !editText.getText().toString().trim().isEmpty();
+    }
+
+    @Override
     protected void initializeUI(View view) {
-        setTitle("Step Two Title");
+        setTitle("Step One Title");
+        setTitleColor(Color.GRAY);
 
         View customView = LayoutInflater.from(getContext()).inflate(R.layout.custom_content_layout, null);
         editText = customView.findViewById(R.id.userInputEditText);
@@ -20,14 +28,16 @@ EditText editText ;
     }
 
     @Override
+    protected void setToastMessage() {
+        this.toastMessage = null;
+
+    }
+
+    @Override
     protected void loadData() {
         // Load additional data if needed
     }
 
-    public String getCustomUserInput() {
-        if (editText != null) {
-            return editText.getText().toString();
-        }
-        return "";
-    }
+
+
 }

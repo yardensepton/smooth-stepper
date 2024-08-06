@@ -32,21 +32,17 @@
 
         <Button
             android:id="@+id/prevButton"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:background="@color/button_color"
             android:text="@string/previous"
-            android:textColor="#8C9EFF" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/nextButton"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/button_color"
             android:text="@string/next"
-            android:textColor="#8C9EFF" />
+            android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

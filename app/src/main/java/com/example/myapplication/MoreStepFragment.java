@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -10,12 +12,17 @@ import com.example.smoothstepper.BaseStepperFragment;
 import java.util.ArrayList;
 
 public class MoreStepFragment extends BaseStepperFragment {
-    ArrayList<CheckBox> checkBoxes ;
+    ArrayList<CheckBox> checkBoxes;
+
+    @Override
+    protected boolean isDataValid() {
+        return !getCustomUserInput().isEmpty();
+    }
 
     @Override
     protected void initializeUI(View view) {
-        setTitle("Step One Title");
-//        setMessage("This is the message for step one.");
+        setTitle("Step Two Title");
+        setTitleColor(Color.RED);
 
         View customView = LayoutInflater.from(getContext()).inflate(R.layout.custom_checkboxes_layout, null);
         checkBoxes = new ArrayList<>();
@@ -25,6 +32,11 @@ public class MoreStepFragment extends BaseStepperFragment {
         checkBoxes.add(customView.findViewById(R.id.checkBox4));
         checkBoxes.add(customView.findViewById(R.id.checkBox5));
         addCustomContent(customView);
+    }
+
+    @Override
+    protected void setToastMessage() {
+        this.toastMessage = "fill the checkboxes";
     }
 
     @Override
@@ -46,4 +58,5 @@ public class MoreStepFragment extends BaseStepperFragment {
 
         return selectedItems.toString();
     }
+
 }
