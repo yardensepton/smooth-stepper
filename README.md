@@ -3,13 +3,13 @@ SmoothStepper is a customizable stepper view library for Android, providing a sm
 This library allows you to create a step-by-step UI with tabs, buttons, and customizable styles.
 
 ## Features
-Dynamic Tabs: Automatically generate and manage tabs for each step.
-Flexible Step Data: Steps can contain any data or UI elements, allowing for a highly customizable experience.
-Customizable Buttons: Change button colors, and sizes.
-Step Validation: Check if the current step's data is valid before proceeding.
-Custom Toast Messages: Display custom toast messages based on the step's requirements.
-Icon Support: Add icons to tabs for better visual representation.
-Clickability Control: Enable or disable tab clickability.
+1. Dynamic Tabs: Automatically generate and manage tabs for each step.
+2. Flexible Step Data: Steps can contain any data or UI elements, allowing for a highly customizable experience.
+3. Customizable Buttons: Change button colors, and sizes.
+4. Step Validation: Check if the current step's data is valid before proceeding.
+5. Custom Toast Messages: Display custom toast messages based on the step's requirements.
+6. Icon Support: Add icons to tabs for better visual representation.
+7. Clickability Control: Enable or disable tab clickability.
 
 ## Installation:
 1. Add the following dependency to your build.gradle file:
