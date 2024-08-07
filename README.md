@@ -126,6 +126,31 @@ EditText editText ;
 
 }
 ```
+Make sure to add a custom layout for each step. For example:
+```custom_content_layout.xml```
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/userInputEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_your_text_here"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:background="@android:drawable/edit_text"/>
+
+
+</LinearLayout>
+```
+
+
+
 
 
 
