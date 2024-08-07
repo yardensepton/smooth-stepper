@@ -39,12 +39,37 @@ repositories {
 }
 ```
 
-## Components:
+## Components Overview:
 | Component | Description |
 | --- | --- |
 | BaseStepperFragment | An abstract class for creating fragments with step validation logic.|
-| StepperAdapter | An adapter for managing the fragments in the stepper view. |
+| StepperAdapter | This adapter is used internally to manage the fragments for each step. It operates behind the scenes and is not directly interacted with by users of the library.  |
 | StepperView | The main view component that manages navigation, tabs, and button controls. |
+
+## Component Descriptions:
+
+### BaseStepperFragment
+| Method | Description |
+| --- | --- |
+| initializeUI(View view) |  Abstract method to be overridden by subclasses responsible for setting up and initializing the user interface elements specific to the fragment.  |
+| isDataValid()	 | Abstract method to be overridden by subclasses to validate the step's data.|
+| loadData() | Abstract method to be overridden by subclasses to load data if needed for that fragment. |
+| setToastMessage() | Abstract method to be overridden by subclasses to add the toast message if needed for that step. This method allows each fragment to define a custom validation. |
+| setTitle(String title) | Method to set the title for each base fragment. | 
+| setTitleSize(float size) | Method to change the title's size | 
+| setTitleColor(int color) | Method to change the title's color | 
+
+### StepperView
+| Method | Description |
+| --- | --- |
+| initializeUI(View view) |  Abstract method to be overridden by subclasses responsible for setting up and initializing the user interface elements specific to the fragment.  |
+| isDataValid()	 | Abstract method to be overridden by subclasses to validate the step's data.|
+| loadData() | Abstract method to be overridden by subclasses to load data if needed for that fragment. |
+| setToastMessage() | Abstract method to be overridden by subclasses to add the toast message if needed for that step. This method allows each fragment to define a custom validation. |
+| setTitle(String title) | Method to set the title for each base fragment. | 
+| setTitleSize(float size) | Method to change the title's size | 
+| setTitleColor(int color) | Method to change the title's color | 
+
 
 ## Usage:
 1. Add SmoothStepper to the wanted layout:
@@ -54,6 +79,7 @@ repositories {
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
 ```
+2. Create a fragment for each step, make sure they ```extends BaseStepperFragment```
 
 
 
