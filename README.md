@@ -62,13 +62,14 @@ repositories {
 ### StepperView
 | Method | Description |
 | --- | --- |
-| initializeUI(View view) |  Abstract method to be overridden by subclasses responsible for setting up and initializing the user interface elements specific to the fragment.  |
-| isDataValid()	 | Abstract method to be overridden by subclasses to validate the step's data.|
-| loadData() | Abstract method to be overridden by subclasses to load data if needed for that fragment. |
-| setToastMessage() | Abstract method to be overridden by subclasses to add the toast message if needed for that step. This method allows each fragment to define a custom validation. |
-| setTitle(String title) | Method to set the title for each base fragment. | 
-| setTitleSize(float size) | Method to change the title's size | 
-| setTitleColor(int color) | Method to change the title's color | 
+| setSteps(FragmentActivity fragmentActivity, List<Fragment> fragments) |  Sets up the steps and initializes the stepper view with the provided fragments  |
+| areTabsClickable(boolean areTabsClickable) | Enables or disables tab clickability.|
+| addTabsIcons(ArrayList<Integer> drawableIds) | Adds icons to tabs. |
+| setButtonsBackgroundColor(int color) | Sets the background color of the previous and next buttons. |
+| setButtonsTextColor(int color) | Sets the text color of the previous and next buttons. | 
+| setButtonsTextSize(float size) | Sets the text size of the previous and next buttons. |
+| setTabsColor(int selectedColor, int unselectedColor) | Sets the text and indicator color for tabs. | 
+| setFinishButtonClickListener(FinishButtonClickListener listener) | Sets a listener for the finish button click event.| 
 
 
 ## Usage:
@@ -148,6 +149,70 @@ Make sure to add a custom layout for each step. For example:
 
 </LinearLayout>
 ```
+3. Setup StepperView in Your Activity:
+  ```
+import com.example.smoothstepper.StepperView;
+
+// Initialize your StepperView
+StepperView stepperView = findViewById(R.id.stepperView);
+
+// Create and set up your fragments for each step
+List<Fragment> fragments = new ArrayList<>();
+fragments.add(new StepFragment());
+// Add more fragments as needed
+
+stepperView.setSteps(this, fragments)
+    .setFinishButtonClickListener(() -> {
+        // Handle finish button click
+    });
+```
+4. Change the stepper as you wish - Add icon list, change tabs colors when selected and unselected
+   Complete example:
+```
+package com.example.myapplication;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.example.smoothstepper.StepperView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        StepperView stepperView = findViewById(R.id.stepperView);
+        ArrayList<Integer> icons = new ArrayList<>();
+        icons.add(R.drawable.user_icon);
+        icons.add(R.drawable.fruit_icon);
+
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new StepFragment());
+        fragments.add(new MoreStepFragment());
+        stepperView.setButtonsBackgroundColor(Color.BLUE).
+                setButtonsTextColor(Color.WHITE)
+                .setTabsColor(Color.RED, Color.GRAY)
+                .setSteps(this, fragments)
+                .areTabsClickable(false).addTabsIcons(icons)
+                .setFinishButtonClickListener(finishStepper());
+    }
+
+    private StepperView.FinishButtonClickListener finishStepper() {
+        return () -> Log.e("MainActivity", "Finish button clicked");
+    }
+}
+```
+
+   
 
 
 
