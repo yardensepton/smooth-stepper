@@ -5,7 +5,7 @@ This library allows you to create a step-by-step UI with tabs, buttons, and cust
 ## Features
 Dynamic Tabs: Automatically generate and manage tabs for each step.
 Flexible Step Data: Steps can contain any data or UI elements, allowing for a highly customizable experience.
-Customizable Buttons: Change button colors, text, and sizes.
+Customizable Buttons: Change button colors, and sizes.
 Step Validation: Check if the current step's data is valid before proceeding.
 Custom Toast Messages: Display custom toast messages based on the step's requirements.
 Icon Support: Add icons to tabs for better visual representation.
