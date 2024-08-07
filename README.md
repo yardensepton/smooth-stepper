@@ -13,7 +13,7 @@ Clickability Control: Enable or disable tab clickability.
 
 ## Installation:
 1. Add the following dependency to your build.gradle file:
-   ```
+```
 dependencies {
     implementation ("com.github.yardensepton:smooth-stepper:1.0.0")
 }
