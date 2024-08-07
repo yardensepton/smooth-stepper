@@ -166,8 +166,8 @@ stepperView.setSteps(this, fragments)
         // Handle finish button click
     });
 ```
-4. Change the stepper as you wish - Add icon list, change tabs colors when selected and unselected
-   Complete example:
+4. Change the stepper as you wish - complete example:
+* You can find the complete example in the app folder of this repository.
 ```
 package com.example.myapplication;
 
@@ -211,7 +211,6 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
-
    
 
 
