@@ -36,9 +36,11 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
-    implementation(project(":SmoothStepper"))
+//    implementation(project(":SmoothStepper"))
     implementation(libs.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation ("com.github.yardensepton:smooth-stepper:1.0.0")
+
 }

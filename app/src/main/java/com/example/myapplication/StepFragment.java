@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -29,7 +28,7 @@ EditText editText ;
 
     @Override
     protected void setToastMessage() {
-        this.toastMessage = null;
+        this.toastMessage = "Please add your name";
 
     }
 

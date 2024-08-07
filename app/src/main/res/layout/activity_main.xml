@@ -10,12 +10,6 @@
     <com.example.smoothstepper.StepperView
         android:id="@+id/stepperView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:nextButtonText="Next"
-        app:nextButtonTextColor="@color/colorPrimary"
-        app:prevButtonText="Back"
-        app:prevButtonTextColor="@color/colorAccent"
-        tools:layout_editor_absoluteX="-87dp"
-        tools:layout_editor_absoluteY="-81dp" />
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
