@@ -39,5 +39,24 @@ repositories {
 }
 ```
 
+## Components:
+| Component | Description |
+| --- | --- |
+| BaseStepperFragment | An abstract class for creating fragments with step validation logic.|
+| StepperAdapter | An adapter for managing the fragments in the stepper view. |
+| StepperView | The main view component that manages navigation, tabs, and button controls. |
+
+## Usage:
+1. Add SmoothStepper to the wanted layout:
+```
+<com.example.smoothstepper.StepperView
+    android:id="@+id/stepperView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+```
+
+
+
+
 
 
